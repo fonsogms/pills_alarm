@@ -1,21 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { useFonts } from "@expo-google-fonts/inter";
+
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+import { colors, screen } from "./globalVariable";
+import Index from "./components/Index";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  let [fontsLoaded] = useFonts({
+    "Roboto-Medium": require("./assets/Roboto/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("./assets/Roboto/Roboto-Bold.ttf"),
+    "Roboto-Regular": require("./assets/Roboto/Roboto-Regular.ttf"),
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  if (!fontsLoaded) {
+    return null;
+  } else {
+    return <Index></Index>;
+  }
+}

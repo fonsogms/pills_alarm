@@ -4,10 +4,9 @@ import * as SQLite from "expo-sqlite";
 import { queryDB } from "../DB";
 import { PillsInterface } from "../pills.interface";
 const PillsList = ({ pills }: { pills: PillsInterface[] }) => {
-  console.log(pills);
   return (
     <ScrollView>
-      {pills?.map((pill) => {
+      {pills.map((pill) => {
         return <Text>{pill.name}</Text>;
       })}
     </ScrollView>

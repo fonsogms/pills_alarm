@@ -13,4 +13,11 @@ export const colors = {
   carnation: "#F95151",
   smoky_blue: "#525E76",
   whitey: "#fff",
+  larchmare: "#7BC5AE",
+  observatory: "#028C6A",
+};
+export const fonts = {
+  roboto_medium: "Roboto-Medium",
+  roboto_bold: "Roboto-Bold",
+  roboto_regular: "Roboto-Regular",
 };

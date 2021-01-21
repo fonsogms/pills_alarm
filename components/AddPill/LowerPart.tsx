@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { screen, colors } from "../../globalVariable";
+import { screen, colors, fonts } from "../../globalVariable";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -47,7 +47,7 @@ const LowerPart = () => {
             <Ionicons
               name="time-outline"
               size={40}
-              color={colors.carnation}
+              color={colors.observatory}
               style={{ paddingBottom: 10 }}
             ></Ionicons>
             <Text
@@ -78,9 +78,38 @@ const LowerPart = () => {
           return (
             <View
               key={hour.id}
-              style={{ marginHorizontal: screen.width * 0.1, marginTop: 10 }}
+              style={{
+                marginHorizontal: screen.width * 0.1,
+                marginTop: 10,
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
-              <Text>{hour.date.toLocaleTimeString()}</Text>
+              <Text
+                style={{
+                  fontFamily: fonts.roboto_medium,
+                  color: colors.smoky_blue,
+                  fontSize: 18,
+                  marginRight: 10,
+                }}
+              >
+                {hour.date.toLocaleTimeString()}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  const filteredHours = hours.filter((elem) => {
+                    if (elem.id !== hour.id) return true;
+                  });
+                  setHours(filteredHours);
+                }}
+              >
+                <Ionicons
+                  name="close-circle-outline"
+                  color={colors.carnation}
+                  size={35}
+                ></Ionicons>
+              </TouchableOpacity>
             </View>
           );
         })

@@ -5,6 +5,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { colors, screen } from "./globalVariable";
 import Index from "./components/Index";
+import Routes from "./components/Routes";
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -16,6 +17,6 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   } else {
-    return <Index></Index>;
+    return <Routes></Routes>;
   }
 }

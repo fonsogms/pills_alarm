@@ -1,11 +1,16 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { colors, screen } from "../globalVariable";
+import { colors, screen } from "../../globalVariable";
 TouchableOpacity;
-const AddButton = () => {
+const AddButton = ({ navigation }: { navigation: any }) => {
   return (
-    <TouchableOpacity style={circlestyle.container}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("Add_Pill");
+      }}
+      style={circlestyle.container}
+    >
       <Ionicons name="add" size={40} color={colors.surf_green} />
     </TouchableOpacity>
   );

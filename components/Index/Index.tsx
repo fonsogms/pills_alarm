@@ -8,16 +8,12 @@ import AddButton from "./AddButton";
 import PillsList from "./PillsList";
 import { PillsInterface } from "../../pills.interface";
 const Index = (props: any) => {
-  const [DB, setDB] = useState<SQLite.WebSQLDatabase>();
   const [pills, setPills] = useState<PillsInterface[]>([]);
   useEffect(() => {
-    if (!DB) {
-      getDB(setDB);
-    } else {
-      getPills(DB);
+    if (props.database) {
+      getPills(props.database);
     }
-  }, [DB]);
-
+  }, [props.database]);
   const getPills = async (database: SQLite.WebSQLDatabase) => {
     const response = await queryDB(database, "SELECT * FROM pills");
     console.log(response);

@@ -7,16 +7,28 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 import Picker from "react-native-picker-select";
 import { PillsInterface } from "../../pills.interface";
-const LowerPart = () => {
-  const [number, setNumber] = useState<number>(0);
+import { NewPill } from "./newPill.interface";
+const LowerPart = ({
+  newPill,
+  setNewPill,
+}: {
+  newPill: NewPill;
+  setNewPill: React.Dispatch<React.SetStateAction<NewPill>>;
+}) => {
   const [showDate, setShowDate] = useState<boolean>(false);
-  const [hours, setHours] = useState<{ date: Date; id: number }[]>([]);
   const [date, setDate] = useState<Date>(new Date());
   const onChange = (event, selectedDate) => {
     setShowDate(false);
     setDate(selectedDate);
-    setHours([...hours, { date: selectedDate, id: hours.length + 1 }]);
+    setNewPill({
+      ...newPill,
+      hours: [
+        ...newPill.hours,
+        { date: selectedDate, id: newPill.hours.length + 1 },
+      ],
+    });
   };
+  console.log(newPill);
   return (
     <View
       style={{
@@ -74,7 +86,7 @@ const LowerPart = () => {
           onChange={onChange}
         />
       ) : (
-        hours.map((hour) => {
+        newPill.hours.map((hour) => {
           return (
             <View
               key={hour.id}
@@ -98,10 +110,10 @@ const LowerPart = () => {
               </Text>
               <TouchableOpacity
                 onPress={() => {
-                  const filteredHours = hours.filter((elem) => {
+                  const filteredHours = newPill.hours.filter((elem) => {
                     if (elem.id !== hour.id) return true;
                   });
-                  setHours(filteredHours);
+                  setNewPill({ ...newPill, hours: filteredHours });
                 }}
               >
                 <Ionicons

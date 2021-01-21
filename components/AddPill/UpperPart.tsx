@@ -4,23 +4,14 @@ import { colors, fonts, screen } from "../../globalVariable";
 import DatePicker from "react-native-datepicker";
 import Picker from "react-native-picker-select";
 import NumericInput from "react-native-numeric-input";
-
-const UpperPart = () => {
-  const [newPill, setNewPill] = useState();
+import { NewPill } from "./newPill.interface";
+interface UpperPartprops {
+  newPill: NewPill;
+  setNewPill: React.Dispatch<React.SetStateAction<NewPill>>;
+}
+const UpperPart = ({ newPill, setNewPill }: UpperPartprops) => {
   const [text, setText] = useState<string>("");
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    // setShow(Platform.OS === "ios");
-    setDate(currentDate);
-  };
-
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
 
   return (
     <View
@@ -43,9 +34,9 @@ const UpperPart = () => {
           <TextInput
             placeholder="Put something here"
             onChangeText={(input) => {
-              setText(input);
+              setNewPill({ ...newPill, name: input });
             }}
-            value={text}
+            value={newPill.name}
             style={{
               borderBottomWidth: 1,
               borderBottomColor: "#f2f2e1",
@@ -62,9 +53,9 @@ const UpperPart = () => {
           <TextInput
             placeholder="Put something here"
             onChangeText={(input) => {
-              setText(input);
+              setNewPill({ ...newPill, quantity: input });
             }}
-            value={text}
+            value={newPill.quantity}
             style={{
               borderBottomWidth: 1,
               borderBottomColor: "#f2f2e1",
@@ -92,8 +83,9 @@ const UpperPart = () => {
               <DatePicker
                 placeholder={"select date"}
                 minDate={new Date()}
-                date={date}
+                date={newPill.startingDate}
                 confirmBtnText="Confirm"
+                useNativeDriver={false}
                 cancelBtnText="Cancel"
                 customStyles={{
                   dateText: { color: colors.whitey },
@@ -101,7 +93,7 @@ const UpperPart = () => {
                 }}
                 style={{ width: 200 }}
                 onDateChange={(newDate) => {
-                  setDate(newDate);
+                  setNewPill({ ...newPill, startingDate: newDate });
                 }}
               ></DatePicker>
             </View>
@@ -114,8 +106,9 @@ const UpperPart = () => {
               </Text>
               <NumericInput
                 onChange={(value) => {
-                  console.log(value);
+                  setNewPill({ ...newPill, days: value });
                 }}
+                value={newPill.days}
                 valueType="real"
                 containerStyle={{ backgroundColor: colors.bone }}
                 rounded={true}

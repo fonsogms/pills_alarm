@@ -13,6 +13,7 @@ import { colors, screen } from "../../globalVariable";
 import UpperPart from "./UpperPart";
 import LowerPart from "./LowerPart";
 import { NewPill } from "./newPill.interface";
+import { savePills } from "../../saveNewPill";
 
 const AddPill = (props: any) => {
   const [newPill, setNewPill] = useState<NewPill>({
@@ -20,7 +21,7 @@ const AddPill = (props: any) => {
     quantity: "",
     hours: [],
     days: 0,
-    startingDate: new Date().toDateString(),
+    startingDate: new Date(),
   });
   return (
     <View
@@ -57,7 +58,8 @@ const AddPill = (props: any) => {
           elevation: 17,
         }}
         onPress={() => {
-          console.log(newPill);
+          //console.log(newPill);
+          savePills(newPill, props.database);
         }}
       >
         <Ionicons

@@ -4,5 +4,5 @@ export interface NewPill {
   quantity: string;
   hours: { id: number; date: Date }[];
   days: number;
-  startingDate: string;
+  startingDate: Date;
 }

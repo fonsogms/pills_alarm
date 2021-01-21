@@ -28,7 +28,6 @@ const LowerPart = ({
       ],
     });
   };
-  console.log(newPill);
   return (
     <View
       style={{

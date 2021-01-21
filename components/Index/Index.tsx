@@ -11,6 +11,7 @@ const Index = (props: any) => {
   const [pills, setPills] = useState<PillsInterface[]>([]);
   useEffect(() => {
     if (props.database) {
+      console.log(props.database);
       getPills(props.database);
     }
   }, [props.database]);

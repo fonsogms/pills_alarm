@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TextInput } from "react-native";
-import { colors, screen } from "../../globalVariable";
+import { colors, fonts, screen } from "../../globalVariable";
 import DatePicker from "react-native-datepicker";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import Picker from "react-native-picker-select";
+import NumericInput from "react-native-numeric-input";
+
 const UpperPart = () => {
+  const [newPill, setNewPill] = useState();
   const [text, setText] = useState<string>("");
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
@@ -30,7 +33,7 @@ const UpperPart = () => {
       <View
         style={{
           flex: 1,
-          paddingTop: screen.height * 0.1,
+          // paddingTop: screen.height * 0.1,
           marginHorizontal: 30,
           justifyContent: "space-evenly",
         }}
@@ -71,27 +74,66 @@ const UpperPart = () => {
             }}
           ></TextInput>
         </View>
+
         <View>
-          <Text
-            style={{ color: colors.whitey, fontSize: 18, marginBottom: 10 }}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
           >
-            Starting from when?
-          </Text>
-          <DatePicker
-            placeholder={"select date"}
-            minDate={new Date()}
-            date={date}
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateText: { color: colors.whitey },
-              // ... You can check the source to find the other keys.
-            }}
-            style={{ width: 200 }}
-            onDateChange={(newDate) => {
-              setDate(newDate);
-            }}
-          ></DatePicker>
+            <View>
+              <Text
+                style={{ color: colors.whitey, fontSize: 18, marginBottom: 10 }}
+              >
+                Starting from when?
+              </Text>
+              <DatePicker
+                placeholder={"select date"}
+                minDate={new Date()}
+                date={date}
+                confirmBtnText="Confirm"
+                cancelBtnText="Cancel"
+                customStyles={{
+                  dateText: { color: colors.whitey },
+                  // ... You can check the source to find the other keys.
+                }}
+                style={{ width: 200 }}
+                onDateChange={(newDate) => {
+                  setDate(newDate);
+                }}
+              ></DatePicker>
+            </View>
+
+            <View>
+              <Text
+                style={{ color: colors.whitey, fontSize: 18, marginBottom: 10 }}
+              >
+                How many days?
+              </Text>
+              <NumericInput
+                onChange={(value) => {
+                  console.log(value);
+                }}
+                valueType="real"
+                containerStyle={{ backgroundColor: colors.bone }}
+                rounded={true}
+                totalWidth={90}
+                totalHeight={40}
+                type="up-down"
+                upDownButtonsBackgroundColor={colors.bone}
+                iconStyle={{
+                  //@ts-ignore
+
+                  fontSize: 20,
+                  color: colors.observatory,
+                  alignSelf: "center",
+                }}
+                textColor={colors.observatory}
+              ></NumericInput>
+            </View>
+          </View>
         </View>
       </View>
     </View>

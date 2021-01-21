@@ -1,7 +1,8 @@
 export interface PillsInterface {
   id: number;
   name: string;
-  quantity: number;
+  quantity: string;
   hour: string;
+
   day: string;
 }

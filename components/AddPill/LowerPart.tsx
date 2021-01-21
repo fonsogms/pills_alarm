@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { screen, colors, fonts } from "../../globalVariable";
+import { screen, colors, fonts, convertTime12to24 } from "../../globalVariable";
 import { Ionicons } from "@expo/vector-icons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -94,7 +94,7 @@ const LowerPart = () => {
                   marginRight: 10,
                 }}
               >
-                {hour.date.toLocaleTimeString()}
+                {convertTime12to24(hour.date.toLocaleTimeString())}
               </Text>
               <TouchableOpacity
                 onPress={() => {

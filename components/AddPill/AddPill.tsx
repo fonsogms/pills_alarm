@@ -21,6 +21,19 @@ const AddPill = (props: any) => {
         flexDirection: "column",
       }}
     >
+      <View>
+        <Text
+          style={{
+            fontSize: 30,
+            paddingTop: screen.height * 0.08,
+            color: colors.whitey,
+            textAlign: "center",
+          }}
+        >
+          Add a pill
+        </Text>
+      </View>
+
       <TouchableOpacity
         style={{
           left: screen.width * 0.05,
@@ -34,7 +47,6 @@ const AddPill = (props: any) => {
       >
         <Ionicons name="arrow-back" color={colors.whitey} size={40}></Ionicons>
       </TouchableOpacity>
-
       <UpperPart></UpperPart>
       <LowerPart></LowerPart>
     </View>

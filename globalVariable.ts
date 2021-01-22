@@ -6,6 +6,7 @@ export const PILLS_COLUMN_QUANTITY = "quantity";
 export const PILLS_COLUMN_ID = "id";
 export const PILLS_COLUMN_TIME = "time";
 export const PILLS_COLUMN_DAY = "day";
+export const PILLS_COLUMN_TAKEN = "taken";
 
 export const colors = {
   bone: "#DFE4DE",

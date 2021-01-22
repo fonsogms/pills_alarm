@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import AddPill from "../AddPill/AddPill";
 import { getDB, queryDB } from "../../DB";
 import * as SQLite from "expo-sqlite";
-import { colors, screen } from "../../globalVariable";
+import { colors, fonts, screen } from "../../globalVariable";
 import AddButton from "./AddButton";
 import PillsList from "./PillsList";
 import { PillsInterface } from "../../pills.interface";
@@ -14,7 +14,7 @@ const Index = (props: any) => {
       console.log(props.database);
       getPills(props.database);
     }
-  }, [props.database]);
+  }, [props.database, props.route]);
   const getPills = async (database: SQLite.WebSQLDatabase) => {
     const response = await queryDB(database, "SELECT * FROM pills");
     console.log(response);
@@ -23,17 +23,29 @@ const Index = (props: any) => {
   };
   return (
     <View style={styles.container}>
-      <Text
+      <View
         style={{
-          fontFamily: "Roboto-Medium",
-          fontSize: 30,
-          color: "grey",
-          borderColor: "black",
-          marginTop: screen.height * 0.1,
+          borderBottomWidth: 1,
+          borderBottomColor: colors.bone,
+          marginBottom: 20,
+          width: "100%",
+          marginLeft: screen.width * 0.2,
+          paddingTop: 40,
         }}
       >
-        Your pills for the day
-      </Text>
+        <Text
+          style={{
+            fontFamily: fonts.roboto_bold,
+            fontSize: 35,
+            color: colors.bone,
+            borderColor: "black",
+            marginTop: screen.height * 0.1,
+          }}
+        >
+          Your pills for the day
+        </Text>
+      </View>
+
       <PillsList pills={pills}></PillsList>
       <AddButton navigation={props.navigation}></AddButton>
     </View>
@@ -42,8 +54,8 @@ const Index = (props: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.bone,
-    alignItems: "center",
+    backgroundColor: colors.surf_green,
+    //alignItems: "center",
   },
 });
 

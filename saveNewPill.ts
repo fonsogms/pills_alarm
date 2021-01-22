@@ -6,6 +6,7 @@ import {
   PILLS_COLUMN_DAY,
   PILLS_COLUMN_NAME,
   PILLS_COLUMN_QUANTITY,
+  PILLS_COLUMN_TAKEN,
   PILLS_COLUMN_TIME,
 } from "./globalVariable";
 export const savePills = async (
@@ -18,8 +19,8 @@ export const savePills = async (
     time: string,
     day: string
   ): string => {
-    return `INSERT INTO pills (${PILLS_COLUMN_NAME}, ${PILLS_COLUMN_QUANTITY}, ${PILLS_COLUMN_TIME}, ${PILLS_COLUMN_DAY})
-    VALUES ("${name}", "${quantity}", "${time}", "${day}");`;
+    return `INSERT INTO pills (${PILLS_COLUMN_NAME}, ${PILLS_COLUMN_QUANTITY}, ${PILLS_COLUMN_TIME}, ${PILLS_COLUMN_DAY}, ${PILLS_COLUMN_TAKEN})
+    VALUES ("${name}", "${quantity}", "${time}", "${day}", 0);`;
   };
   for (let day = 0; day < newPill.days; day++) {
     const startingDate = newPill.startingDate;

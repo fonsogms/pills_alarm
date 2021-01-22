@@ -5,6 +5,7 @@ import {
   PILLS_COLUMN_ID,
   PILLS_COLUMN_NAME,
   PILLS_COLUMN_QUANTITY,
+  PILLS_COLUMN_TAKEN,
   PILLS_COLUMN_TIME,
 } from "./globalVariable";
 export const getDB = async (
@@ -19,7 +20,7 @@ export const getDB = async (
     async (tx) => {
       console.log("hello");
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS pills (${PILLS_COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${PILLS_COLUMN_NAME} TEXT, ${PILLS_COLUMN_QUANTITY} INT, ${PILLS_COLUMN_TIME} TEXT, ${PILLS_COLUMN_DAY} TEXT)`,
+        `CREATE TABLE IF NOT EXISTS pills (${PILLS_COLUMN_ID} INTEGER PRIMARY KEY AUTOINCREMENT, ${PILLS_COLUMN_NAME} TEXT, ${PILLS_COLUMN_QUANTITY} INT, ${PILLS_COLUMN_TIME} TEXT, ${PILLS_COLUMN_DAY} TEXT, ${PILLS_COLUMN_TAKEN} INT)`,
         [],
         (txObjt) => {
           console.log("all good", txObjt);

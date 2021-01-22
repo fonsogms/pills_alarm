@@ -17,20 +17,24 @@ const LowerPart = ({
   const [showDate, setShowDate] = useState<boolean>(false);
   const [date, setDate] = useState<Date>(new Date());
   const onChange = (event, selectedDate) => {
-    setShowDate(false);
-    setDate(selectedDate);
-    setNewPill({
-      ...newPill,
-      hours: [
-        ...newPill.hours,
-        { date: selectedDate, id: newPill.hours.length + 1 },
-      ],
-    });
+    if (selectedDate) {
+      setShowDate(false);
+      setDate(selectedDate);
+      setNewPill({
+        ...newPill,
+        hours: [
+          ...newPill.hours,
+          { date: selectedDate, id: newPill.hours.length + 1 },
+        ],
+      });
+    } else {
+      setShowDate(false);
+    }
   };
   return (
     <View
       style={{
-        flex: 0.5,
+        height: screen.height * 0.5,
         backgroundColor: colors.bone,
         borderTopStartRadius: 60,
         borderTopEndRadius: 60,

@@ -16,7 +16,7 @@ const UpperPart = ({ newPill, setNewPill }: UpperPartprops) => {
   return (
     <View
       style={{
-        flex: 0.5,
+        height: screen.height * 0.4,
         backgroundColor: colors.surf_green,
         justifyContent: "center",
       }}
@@ -112,8 +112,9 @@ const UpperPart = ({ newPill, setNewPill }: UpperPartprops) => {
                 valueType="real"
                 containerStyle={{ backgroundColor: colors.bone }}
                 rounded={true}
-                totalWidth={90}
-                totalHeight={40}
+                totalWidth={100}
+                totalHeight={50}
+                minValue={0}
                 type="up-down"
                 upDownButtonsBackgroundColor={colors.bone}
                 iconStyle={{

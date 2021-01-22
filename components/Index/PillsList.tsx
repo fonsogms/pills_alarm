@@ -64,7 +64,13 @@ const PillsList = ({
               <Text style={pillTextStyle(pill).container}>
                 {pill.name} ({pill.quantity})
               </Text>
-              <Text style={pillTextStyle(pill).container}>
+              <Text
+                style={{
+                  ...pillTextStyle(pill).container,
+                  textDecorationLine: "none",
+                  color: colors.bone,
+                }}
+              >
                 {convertTime12to24(pill.time)}
               </Text>
             </View>

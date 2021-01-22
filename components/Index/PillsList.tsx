@@ -7,9 +7,30 @@ import { PillsInterface } from "../../pills.interface";
 import { colors, fonts, screen } from "../../globalVariable";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import GestureRecognizer from "react-native-swipe-gestures";
-const PillsList = ({ pills }: { pills: PillsInterface[] }) => {
-  console.log(pills.length);
-
+const PillsList = ({
+  pills,
+  setPills,
+  database,
+}: {
+  pills: PillsInterface[];
+  setPills: React.Dispatch<React.SetStateAction<PillsInterface[]>>;
+  database: SQLite.WebSQLDatabase;
+}) => {
+  const checkPill = async (id: number, taken: number): Promise<void> => {
+    let newTakenValue: number;
+    if (taken) newTakenValue = 0;
+    else newTakenValue = 1;
+    const response = await queryDB(
+      database,
+      `UPDATE pills SET taken = ${newTakenValue} WHERE id=${id}; `
+    );
+    console.log(response);
+    const newPills = pills.map((elem) => {
+      if (elem.id == id) return { ...elem, taken: newTakenValue };
+      else return elem;
+    });
+    setPills(newPills);
+  };
   return (
     <ScrollView>
       {pills.map((pill) => {
@@ -29,15 +50,22 @@ const PillsList = ({ pills }: { pills: PillsInterface[] }) => {
           >
             <CheckBox
               checkedIcon="dot-circle-o"
-              checkedColor="red"
-              checked={true}
+              uncheckedIcon="circle-o"
+              checkedColor={colors.carnation}
+              uncheckedColor={colors.larchmare}
+              checked={pill.taken ? true : false}
+              onPress={() => {
+                console.log(pill.id);
+                checkPill(pill.id, pill.taken);
+              }}
             ></CheckBox>
             <Text
+              key={pill.id}
               style={{
                 fontSize: 20,
                 fontFamily: fonts.roboto_medium,
-                color: colors.carnation,
-                textDecorationLine: "line-through",
+                color: pill.taken ? colors.carnation : colors.bone,
+                textDecorationLine: pill.taken ? "line-through" : "none",
                 textDecorationStyle: "solid",
               }}
             >

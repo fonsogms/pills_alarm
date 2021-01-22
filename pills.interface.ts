@@ -3,6 +3,6 @@ export interface PillsInterface {
   name: string;
   quantity: string;
   hour: string;
-
+  taken: number;
   day: string;
 }

@@ -46,7 +46,11 @@ const Index = (props: any) => {
         </Text>
       </View>
 
-      <PillsList pills={pills}></PillsList>
+      <PillsList
+        pills={pills}
+        setPills={setPills}
+        database={props.database}
+      ></PillsList>
       <AddButton navigation={props.navigation}></AddButton>
     </View>
   );

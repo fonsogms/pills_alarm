@@ -5,4 +5,5 @@ export interface PillsInterface {
   hour: string;
   taken: number;
   day: string;
+  time: string;
 }

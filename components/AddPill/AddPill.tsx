@@ -60,7 +60,7 @@ const AddPill = (props: any) => {
         onPress={() => {
           //console.log(newPill);
           savePills(newPill, props.database);
-          props.navigation.navigate("Home");
+          props.navigation.navigate("Home", { newPill: newPill });
         }}
       >
         <Ionicons

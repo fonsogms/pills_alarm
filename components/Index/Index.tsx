@@ -3,48 +3,42 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import AddPill from "../AddPill/AddPill";
 import { getDB, queryDB } from "../../DB";
 import * as SQLite from "expo-sqlite";
-import { colors, fonts, screen } from "../../globalVariable";
+import {
+  colors,
+  convertTime12to24,
+  fonts,
+  PILLS_COLUMN_DAY,
+  PILLS_COLUMN_TAKEN,
+  screen,
+} from "../../globalVariable";
 import AddButton from "./AddButton";
 import PillsList from "./PillsList";
+import Header from "./Header";
 import { PillsInterface } from "../../pills.interface";
 const Index = (props: any) => {
   const [pills, setPills] = useState<PillsInterface[]>([]);
   useEffect(() => {
+    console.log("happening");
     if (props.database) {
       console.log(props.database);
       getPills(props.database);
     }
   }, [props.database, props.route]);
   const getPills = async (database: SQLite.WebSQLDatabase) => {
-    const response = await queryDB(database, "SELECT * FROM pills");
-    console.log(response);
-    const dbPills = response._array;
+    const response = await queryDB(database, `SELECT * FROM pills`);
+    console.log(response._array, "the response");
+    let dbPills = response._array;
+    dbPills.sort((a: PillsInterface, b: PillsInterface) => {
+      const hour1 = convertTime12to24(a.time).replace(":", "");
+      const hour2 = convertTime12to24(b.time).replace(":", "");
+      return parseFloat(hour1) - parseFloat(hour2);
+    });
     setPills(dbPills);
   };
+  console.log("que pasa");
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          borderBottomWidth: 1,
-          borderBottomColor: colors.bone,
-          marginBottom: 20,
-          width: "100%",
-          marginLeft: screen.width * 0.2,
-          paddingTop: 40,
-        }}
-      >
-        <Text
-          style={{
-            fontFamily: fonts.roboto_bold,
-            fontSize: 35,
-            color: colors.bone,
-            borderColor: "black",
-            marginTop: screen.height * 0.1,
-          }}
-        >
-          Your pills for the day
-        </Text>
-      </View>
+      <Header pills={pills}></Header>
 
       <PillsList
         pills={pills}

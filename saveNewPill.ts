@@ -35,7 +35,7 @@ export const savePills = async (
       );
       const response = await queryDB(
         database,
-        insertQuery(newPill.name, newPill.quantity, pillDate, pillHour)
+        insertQuery(newPill.name, newPill.quantity, pillHour, pillDate)
       );
       console.log(response);
     }

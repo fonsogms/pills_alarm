@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import * as SQLite from "expo-sqlite";
 import { queryDB } from "../../DB";
 import { CheckBox } from "react-native-elements";
 import { PillsInterface } from "../../pills.interface";
-import { colors, fonts, screen } from "../../globalVariable";
-import Swipeable from "react-native-gesture-handler/Swipeable";
+import { colors, convertTime12to24, fonts, screen } from "../../globalVariable";
 import GestureRecognizer from "react-native-swipe-gestures";
 const PillsList = ({
   pills,
@@ -40,11 +39,12 @@ const PillsList = ({
             style={{
               height: 100,
               // backgroundColor: colors.bone,
+              flex: 1,
               marginVertical: 8,
-              justifyContent: "center",
+              justifyContent: "flex-start",
               alignItems: "center",
-              borderRadius: 5,
               flexDirection: "row",
+              marginLeft: 10,
             }}
             key={pill.id}
           >
@@ -54,28 +54,36 @@ const PillsList = ({
               checkedColor={colors.carnation}
               uncheckedColor={colors.larchmare}
               checked={pill.taken ? true : false}
+              size={25}
               onPress={() => {
                 console.log(pill.id);
                 checkPill(pill.id, pill.taken);
               }}
             ></CheckBox>
-            <Text
-              key={pill.id}
-              style={{
-                fontSize: 20,
-                fontFamily: fonts.roboto_medium,
-                color: pill.taken ? colors.carnation : colors.bone,
-                textDecorationLine: pill.taken ? "line-through" : "none",
-                textDecorationStyle: "solid",
-              }}
-            >
-              {pill.name}
-            </Text>
+            <View key={pill.id}>
+              <Text style={pillTextStyle(pill).container}>
+                {pill.name} ({pill.quantity})
+              </Text>
+              <Text style={pillTextStyle(pill).container}>
+                {convertTime12to24(pill.time)}
+              </Text>
+            </View>
           </View>
         );
       })}
     </ScrollView>
   );
 };
-
+const pillTextStyle = (pill: PillsInterface) =>
+  StyleSheet.create({
+    container: {
+      fontSize: 20,
+      marginLeft: 15,
+      fontFamily: fonts.roboto_medium,
+      color: pill.taken ? colors.carnation : colors.bone,
+      textDecorationLine: pill.taken ? "line-through" : "none",
+      textDecorationStyle: "solid",
+      marginBottom: 2,
+    },
+  });
 export default PillsList;

@@ -1,5 +1,5 @@
 # pills_alarm
-A small medicine reminder using push notifications and SQLite
+A small medicine reminder using push notifications and SQLite developed with react-native and Expo
 
 To check the app please go to the expo link https://exp.host/@algarmisu/pills-alarm
 

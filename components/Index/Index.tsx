@@ -18,9 +18,7 @@ import { PillsInterface } from "../../pills.interface";
 const Index = (props: any) => {
   const [pills, setPills] = useState<PillsInterface[]>([]);
   useEffect(() => {
-    console.log("happening");
     if (props.database) {
-      console.log(props.database);
       getPills(props.database);
     }
   }, [props.database, props.route]);

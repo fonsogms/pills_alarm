@@ -25,13 +25,18 @@ async function registerForPushNotificationsAsync() {
 
   console.log(token, "this is the token!!");
 }
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
+
+export const setPushNotifications = async () => {
+  await registerForPushNotificationsAsync();
+  Notifications.setNotificationHandler({
+    handleNotification: async () => ({
+      shouldShowAlert: true,
+      shouldPlaySound: true,
+      shouldSetBadge: true,
+    }),
+  });
+};
+
 Notifications.scheduleNotificationAsync({
   content: {
     title: "Time's up!",

@@ -9,6 +9,7 @@ import {
   PILLS_COLUMN_TAKEN,
   PILLS_COLUMN_TIME,
 } from "./globalVariable";
+import { createPushNotification } from "./savePushNotification";
 export const savePills = async (
   newPill: NewPill,
   database: SQLite.WebSQLDatabase
@@ -37,6 +38,7 @@ export const savePills = async (
         database,
         insertQuery(newPill.name, newPill.quantity, pillHour, pillDate)
       );
+      createPushNotification(newPill.name, pillDate, pillHour);
       console.log(response);
     }
   }
